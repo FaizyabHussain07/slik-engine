@@ -1,0 +1,9 @@
+{
+  "name": "slik-engine",
+  "private": true,
+  "scripts": {
+    "dev:cli": "pnpm --filter cli dev",
+    "build:cli": "pnpm --filter cli build",
+    "dev:web": "pnpm --filter website dev"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "create-slik",
+  "version": "0.1.0",
+  "description": "Design at the speed of thought — Slik boilerplate CLI",
+  "type": "module",
+  "bin": {
+    "create-slik": "./dist/index.js"
+  },
+  "files": ["dist"],
+  "publishConfig": { "access": "public" },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsup src/index.ts --format esm --clean"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "degit": "^2.8.4",
+    "execa": "^8.0.1",
+    "picocolors": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.3.0"
+  }
+}
