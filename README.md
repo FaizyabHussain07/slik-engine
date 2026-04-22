@@ -1,8 +1,6 @@
-# Slik — design at the speed of thought
+# **create-slik** — Design at the speed of thought
 
-[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
-Slik is a design-first full-stack boilerplate generator. Create beautiful, production-ready applications in seconds.
+![npm version](https://img.shields.io/npm/v/create-slik) ![License: MIT](https://img.shields.io/badge/license-MIT-blue) ![npm downloads](https://img.shields.io/npm/dm/create-slik) ![GitHub stars](https://img.shields.io/github/stars/FaizyabHussain07/slik-engine)
 
 ## Quick Start
 
@@ -10,37 +8,81 @@ Slik is a design-first full-stack boilerplate generator. Create beautiful, produ
 npx create-slik@latest
 ```
 
-Follow the prompts to select your stack and vibe, and Slik will generate a complete, ready-to-use project.
+## How It Works
+
+The CLI asks 3 questions, then generates a full-stack SaaS in under 60 seconds:
+
+```bash
+✦ slik — design at the speed of thought
+◆ Project name? › my-app
+◆ Pick a stack? › Next.js 15
+◆ Pick a vibe? › Bento
+◇ Creating your project
+  my-app
+  Stack   next-js
+  Vibe    bento-sb
+◇ Template cloned ✓
+◇ Dependencies installed ✓
+✦ Your Slik project is ready!
+  ❶  cd my-app
+  ❷  Fill .env.local with your Supabase credentials
+  ❸  npm run dev
+  Docs    → https://slik.dev/docs
+  Issues  → https://github.com/FaizyabHussain07/slik-engine/issues
+```
 
 ## Stack + Vibe Matrix
 
-| Stack    | bento-sb | frost-sb | mono-sb |
-|----------|----------|----------|---------|
-| next-js  | ✅       | 🔜       | 🔜      |
-| react-js | 🔜       | 🔜       | 🔜      |
-| html     | 🔜       | 🔜       | 🔜      |
+|              | Bento | Frost | Mono |
+|--------------|-------|-------|------|
+| Next.js 15   |  ✅   |  🔜   |  🔜  |
+| React (Vite) |  ✅   |  🔜   |  🔜  |
+| HTML         |  ✅  |  🔜   |  🔜  |
 
-## Stacks
+## What's Included
 
-- **Next.js 15**: SSR, App Router, recommended for full-stack apps
-- **React (Vite)**: SPA, client-side only
-- **Vanilla HTML**: Ultra-lightweight, no framework
+- 🎯 Landing page (Hero, Features, Pricing, Testimonials, CTA)
+- 🔐 Auth pages (Login, Signup, Reset Password) with Supabase
+- 📊 User Dashboard (Stats, Projects, Activity, Settings)
+- 👤 Admin Panel (User management, role-based access)
+- 🗄️ Supabase integration (Email + Google OAuth, PostgreSQL, RLS)
+- 🔷 TypeScript fully typed
+- 🎨 Tailwind CSS with custom design tokens
+- 📱 Fully responsive (mobile first)
 
-## Vibes
+## Design Themes
 
-- **Bento**: Grid-based editorial dark theme
-- **Frost**: Glassmorphism, light + blur
-- **Mono**: Minimal monochrome, clean
+- **Bento**: Dark editorial grid-based layout, lime accent (#c8f135), DM Serif Display font
+- **Frost**: Glassmorphism light theme, backdrop blur, indigo accent
+- **Mono**: Pure minimal monochrome, black/white only, tight typography
+
+## After Install
+
+1. Create a Supabase project at [supabase.com](https://supabase.com)
+2. Run the SQL migration: `supabase/migrations/001_initial.sql`
+3. Enable Google OAuth in your Supabase dashboard
+4. Fill `.env.local` with your credentials:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+5. Run `npm run dev` → open [localhost:3000](http://localhost:3000)
 
 ## Contributing
 
-Contributions are welcome! Please read our contributing guidelines before submitting PRs.
+PRs welcome — read [CONTRIBUTING.md](https://github.com/FaizyabHussain07/slik-engine/blob/main/CONTRIBUTING.md)
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+## Links
 
-## License
+- **Website**: https://slik.dev
+- **GitHub**: https://github.com/FaizyabHussain07/slik-engine
+- **Docs**: https://slik.dev/docs
+- **Issues**: https://github.com/FaizyabHussain07/slik-engine/issues
 
-MIT License - see LICENSE file for details.
+---
+
+MIT License © [Faizyab Hussain](https://github.com/FaizyabHussain07)
