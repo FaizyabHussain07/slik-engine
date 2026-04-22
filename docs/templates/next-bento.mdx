@@ -1,0 +1,50 @@
+---
+title: Next.js + Bento
+description: The flagship Slik template. Dark editorial grid layout with Supabase.
+---
+
+# Next.js + Bento
+
+The flagship Slik template. Dark, editorial, Bento Grid layout.
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 15 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Database | Supabase (PostgreSQL) |
+| Auth | Supabase Auth |
+| Fonts | DM Serif Display, DM Mono, Geist |
+
+## Pages Included
+
+| Route | Description |
+|-------|-------------|
+| `/` | Landing page with Bento grid |
+| `/login` | Email + Google OAuth login |
+| `/signup` | Registration with password strength |
+| `/reset-password` | Two-state password reset |
+| `/dashboard` | User dashboard (protected) |
+| `/dashboard/settings` | Profile + security settings |
+| `/admin` | Admin panel (admin role required) |
+
+## Design Tokens
+
+```css
+--bg: #0a0a0a
+--surface: #111111
+--accent: #c8f135
+--purple: #9b7ff4
+--teal: #3ecfb2
+```
+
+## Quick Start
+
+```bash
+npx create-slik@latest
+# Choose: Next.js → Bento
+```
+
+Then follow the [Supabase Setup guide](/guides/supabase-setup).

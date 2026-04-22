@@ -1,0 +1,38 @@
+---
+title: Adding Templates
+description: How to add a new stack template to Slik.
+---
+
+# Adding a New Template
+
+## Folder Structure
+
+Create your template at:
+templates/{stack}/{vibe}/
+
+Example: `templates/react-js/bento-sb/` 
+
+## Requirements
+
+Every template must include:
+- [ ] `package.json` with correct dependencies
+- [ ] `.env.example` with all required variables
+- [ ] `README.md` with setup instructions
+- [ ] Landing page
+- [ ] Login + Signup + Reset password pages
+- [ ] User dashboard
+- [ ] Admin panel
+- [ ] Supabase integration
+
+## Update the CLI
+
+In `packages/cli/src/index.ts`, the template path is auto-built:
+```typescript
+const repoPath = `FaizyabHussain07/slik-engine/templates/${stack}/${vibe}` 
+```
+
+No CLI changes needed — just add the folder.
+
+## Update the Matrix
+
+Update `README.md` at repo root to mark your template as ✅.

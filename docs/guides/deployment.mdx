@@ -1,0 +1,38 @@
+---
+title: Deployment
+description: Deploy your Slik project to production.
+---
+
+# Deployment
+
+## Deploy to Vercel (Recommended)
+
+<Steps>
+  <Step title="Push to GitHub">
+```bash
+    git init
+    git add .
+    git commit -m "Initial commit"
+    git remote add origin https://github.com/username/my-app.git
+    git push -u origin main
+```
+  </Step>
+
+  <Step title="Import on Vercel">
+    1. Go to [vercel.com](https://vercel.com)
+    2. Click **"New Project"**
+    3. Import your GitHub repository
+    4. Framework: **Next.js** (auto-detected)
+  </Step>
+
+  <Step title="Add Environment Variables">
+    In Vercel project settings, add all 4 variables from your `.env.local` 
+    
+    Change `NEXT_PUBLIC_SITE_URL` to your production domain:
+NEXT_PUBLIC_SITE_URL=https://your-app.vercel.app
+  </Step>
+
+  <Step title="Deploy">
+    Click **"Deploy"**. Your app is live in ~2 minutes.
+  </Step>
+</Steps>

@@ -1,0 +1,107 @@
+{
+  "name": "Slik",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.ico",
+  "colors": {
+    "primary": "#c8f135",
+    "light": "#d4f55c",
+    "dark": "#a8d420",
+    "background": {
+      "dark": "#0a0a0a"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/FaizyabHussain07/slik-engine"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Get Started",
+    "url": "https://slik.dev"
+  },
+  "tabs": [
+    {
+      "name": "Guides",
+      "url": "guides"
+    },
+    {
+      "name": "Templates",
+      "url": "templates"
+    },
+    {
+      "name": "CLI Reference",
+      "url": "cli"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/FaizyabHussain07/slik-engine"
+    },
+    {
+      "name": "NPM",
+      "icon": "npm",
+      "url": "https://npmjs.com/package/create-slik"
+    },
+    {
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://discord.gg/slik"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "introduction",
+        "quickstart",
+        "installation"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/supabase-setup",
+        "guides/customization",
+        "guides/deployment",
+        "guides/authentication",
+        "guides/adding-pages"
+      ]
+    },
+    {
+      "group": "Templates",
+      "pages": [
+        "templates/overview",
+        "templates/next-bento",
+        "templates/react-bento",
+        "templates/html-bento",
+        "templates/coming-soon"
+      ]
+    },
+    {
+      "group": "CLI Reference",
+      "pages": [
+        "cli/overview",
+        "cli/commands",
+        "cli/options"
+      ]
+    },
+    {
+      "group": "Contributing",
+      "pages": [
+        "contributing/overview",
+        "contributing/adding-templates",
+        "contributing/adding-vibes"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/FaizyabHussain07/slik-engine",
+    "twitter": "https://twitter.com/slik_dev"
+  }
+}

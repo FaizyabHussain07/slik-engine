@@ -1,7 +1,7 @@
 -- slik — react-bento — supabase/migrations/001_initial.sql
 
 -- Create profiles table
-CREATE TABLE public.profiles (
+CREATE TABLE IF NOT EXISTS public.profiles (
   id UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
   email TEXT NOT NULL,
   full_name TEXT,
@@ -12,6 +12,12 @@ CREATE TABLE public.profiles (
 
 -- Set up Row Level Security (RLS)
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
+DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
+DROP POLICY IF EXISTS "Admins can view all profiles" ON public.profiles;
+DROP POLICY IF EXISTS "Admins can update all profiles" ON public.profiles;
 
 -- Create policy to allow users to view their own profile
 CREATE POLICY "Users can view own profile"
@@ -29,23 +35,13 @@ CREATE POLICY "Users can update own profile"
 CREATE POLICY "Admins can view all profiles"
   ON public.profiles
   FOR SELECT
-  USING (
-    EXISTS (
-      SELECT 1 FROM public.profiles
-      WHERE id = auth.uid() AND role = 'admin'
-    )
-  );
+  USING (auth.uid() = id OR (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin');
 
 -- Create policy to allow admins to update all profiles
 CREATE POLICY "Admins can update all profiles"
   ON public.profiles
   FOR UPDATE
-  USING (
-    EXISTS (
-      SELECT 1 FROM public.profiles
-      WHERE id = auth.uid() AND role = 'admin'
-    )
-  );
+  USING (auth.uid() = id OR (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin');
 
 -- Create function to handle new user signup
 CREATE OR REPLACE FUNCTION public.handle_new_user()
@@ -62,6 +58,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
+-- Drop existing trigger if it exists
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+
 -- Create trigger to call function on new user signup
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
@@ -76,6 +75,9 @@ BEGIN
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Drop existing trigger if it exists
+DROP TRIGGER IF EXISTS update_profiles_updated_at ON public.profiles;
 
 -- Create trigger to update updated_at on profile update
 CREATE TRIGGER update_profiles_updated_at

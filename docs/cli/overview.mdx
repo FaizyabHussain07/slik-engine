@@ -1,0 +1,46 @@
+---
+title: CLI Overview
+description: The create-slik CLI reference.
+---
+
+# CLI Reference
+
+## Command
+
+```bash
+npx create-slik@latest
+```
+
+## Interactive Prompts
+
+The CLI asks 3 questions:
+
+### 1. Project Name
+◆  Project name?
+› my-app
+Rules: lowercase letters, numbers, hyphens only.
+
+### 2. Stack
+◆  Pick a stack?
+● Next.js 15     SSR · App Router · Recommended
+○ React (Vite)   SPA · Client-side only
+○ Vanilla HTML   Zero framework · Ultra-light
+
+### 3. Vibe
+◆  Pick a vibe?
+● Bento   Grid-based · Dark · Editorial
+○ Frost   Glassmorphism · Light + blur
+○ Mono    Minimal · Monochrome
+
+## What Happens After
+
+1. Clones template from GitHub
+2. Runs `npm install` 
+3. Runs `git init` + initial commit
+4. Copies `.env.example` → `.env.local` 
+5. Shows next steps
+
+## NPM Package
+Package: create-slik
+Version: 0.1.0
+Registry: npmjs.com/package/create-slik

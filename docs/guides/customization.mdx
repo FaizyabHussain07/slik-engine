@@ -1,0 +1,47 @@
+---
+title: Customization
+description: How to customize your Slik project.
+---
+
+# Customization
+
+## Changing the App Name
+
+Search and replace `YourApp` / `Nexus` across the project:
+```bash
+# On Mac/Linux
+grep -r "YourApp" . --include="*.tsx" --include="*.ts"
+```
+
+Key files to update:
+- `app/layout.tsx` — metadata title
+- `components/layout/Navbar.tsx` — logo text
+- `components/layout/Footer.tsx` — brand name
+
+## Changing Colors
+
+Edit `app/globals.css`:
+```css
+:root {
+  --accent: #c8f135;  /* Change this to your brand color */
+  --purple: #9b7ff4;
+  --teal: #3ecfb2;
+}
+```
+
+## Changing Fonts
+
+Edit `app/layout.tsx`:
+```tsx
+import { DM_Serif_Display, DM_Mono, Geist } from 'next/font/google'
+// Replace with your preferred fonts
+```
+
+## Adding Pages
+
+Create new files in `app/`:
+app/
+├── blog/
+│   └── page.tsx    ← new page at /blog
+├── pricing/
+│   └── page.tsx    ← new page at /pricing

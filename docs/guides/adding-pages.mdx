@@ -1,0 +1,64 @@
+---
+title: Adding Pages
+description: How to add new pages to your Slik project.
+---
+
+# Adding Pages
+
+## Creating New Pages
+
+In Next.js App Router, create a new folder and `page.tsx` file:
+
+```typescript
+// app/pricing/page.tsx
+export default function PricingPage() {
+  return (
+    <div>
+      <h1>Pricing</h1>
+      {/* Your pricing content */}
+    </div>
+  )
+}
+```
+
+This creates a route at `/pricing`.
+
+## Protected Pages
+
+To protect a page, wrap it in a server component that checks auth:
+
+```typescript
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+
+export default async function ProtectedPage() {
+  const supabase = createServerComponentClient({ cookies })
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (!session) {
+    redirect('/login')
+  }
+
+  return <div>Protected content</div>
+}
+```
+
+## Layouts
+
+Create a `layout.tsx` to wrap pages:
+
+```typescript
+// app/dashboard/layout.tsx
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <div className="dashboard-layout">
+      <Sidebar />
+      <main>{children}</main>
+    </div>
+  )
+}
+```

@@ -1,0 +1,39 @@
+---
+title: Adding Vibes
+description: How to add a new design vibe to Slik.
+---
+
+# Adding a New Vibe
+
+## What is a Vibe?
+
+A "vibe" is a design system that can be applied to any stack. Examples:
+- **Bento**: Dark editorial grid
+- **Frost**: Glassmorphism light
+- **Mono**: Minimal monochrome
+
+## Creating a New Vibe
+
+1. Choose a name (e.g., "Neon", "Pastel", "Brutal")
+2. Design the color palette and typography
+3. Apply it to all three stacks:
+   - `templates/next-js/{vibe-name}/`
+   - `templates/react-js/{vibe-name}/`
+   - `templates/html/{vibe-name}/`
+
+## Design Guidelines
+
+- Maintain consistent spacing and layout
+- Use the same page structure across stacks
+- Ensure accessibility (contrast ratios)
+- Test on dark and light modes (if applicable)
+
+## Update Documentation
+
+1. Add to `docs/templates/overview.mdx`
+2. Add to website `MatrixSection.tsx`
+3. Update `README.md` matrix
+
+## Submit
+
+Open a PR with your vibe. We'll review and merge!

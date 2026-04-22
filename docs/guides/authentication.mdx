@@ -1,0 +1,46 @@
+---
+title: Authentication
+description: How authentication works in Slik projects.
+---
+
+# Authentication
+
+## How It Works
+
+Slik uses Supabase Auth with SSR (Server-Side Rendering) support via `@supabase/ssr`.
+
+## Auth Flow
+User visits /login
+→ Fills email + password (or clicks Google)
+→ Supabase authenticates
+→ Session cookie set
+→ Redirect to /dashboard
+
+## Protected Routes
+
+Routes are protected in `middleware.ts`:
+
+```typescript
+// Automatically protects these routes:
+/dashboard/*   → requires any logged-in user
+/admin/*       → requires role = 'admin'
+```
+
+## Making a User Admin
+
+In Supabase SQL Editor:
+```sql
+UPDATE profiles 
+SET role = 'admin' 
+WHERE email = 'your@email.com';
+```
+
+## Adding OAuth Providers
+
+In `app/(auth)/login/page.tsx`, add a new OAuth button:
+```tsx
+await supabase.auth.signInWithOAuth({
+  provider: 'github',  // or 'twitter', 'discord', etc.
+  options: { redirectTo: `${siteUrl}/api/auth/callback` }
+})
+```
