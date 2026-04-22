@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
-import { ArrowRight, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 export default function PreviewPage() {
   const [selectedStack, setSelectedStack] = useState('Next.js');
