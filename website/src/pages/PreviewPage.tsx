@@ -4,6 +4,7 @@ import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import { Star } from 'lucide-react';
 
+
 export default function PreviewPage() {
   const [selectedStack, setSelectedStack] = useState('Next.js');
   const [selectedVibe, setSelectedVibe] = useState('Bento');
