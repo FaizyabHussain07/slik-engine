@@ -27,7 +27,7 @@ The CLI asks 3 questions, then generates a full-stack SaaS in under 60 seconds:
   ❶  cd my-app
   ❷  Fill .env.local with your Supabase credentials
   ❸  npm run dev
-  Docs    → https://slik.dev/docs
+  Docs    → https://slik-dev.vercel.app/docs
   Issues  → https://github.com/FaizyabHussain07/slik-engine/issues
 ```
 
@@ -78,7 +78,7 @@ PRs welcome — read [CONTRIBUTING.md](https://github.com/FaizyabHussain07/slik-
 
 ## Links
 
-- **Website**: https://slik.dev
+- **Website**: https://slik-dev.vercel.app
 - **GitHub**: https://github.com/FaizyabHussain07/slik-engine
 - **Docs**: https://slik.dev/docs
 - **Issues**: https://github.com/FaizyabHussain07/slik-engine/issues
