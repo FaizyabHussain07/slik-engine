@@ -1,44 +1,76 @@
-/* slik — react-bento — src/index.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-900: #1e3a8a;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-  :root {
-    --bg: #0a0a0a;
-    --surface: #111111;
-    --surface2: #1a1a1a;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.13);
-    --text: #f0ede8;
-    --muted: rgba(240,237,232,0.45);
-    --accent: #c8f135;
-    --purple: #9b7ff4;
-    --teal: #3ecfb2;
-    --coral: #ff6b6b;
-  }
-
   body {
-    @apply bg-bg text-text font-sans antialiased;
+    @apply bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300;
   }
 }
 
 @layer components {
-  .bento-cell {
-    @apply bg-surface border border-border rounded-bento hover:-translate-y-0.5 transition-transform duration-300;
+  .glass-panel {
+    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200 dark:border-gray-800 shadow-xl;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-medium rounded-lg shadow-lg shadow-brand-500/30 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2;
   }
 
-  .bento-cell-accent {
-    @apply bg-accent text-bg;
+  .btn-ghost {
+    @apply px-6 py-2.5 bg-transparent border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200 font-medium rounded-lg transition-all duration-300;
+  }
+  
+  .btn-danger {
+    @apply px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-medium rounded-lg shadow-md transition-all flex items-center gap-2;
+  }
+
+  .form-control {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all outline-none;
+  }
+  
+  .loader-mini {
+    @apply w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin;
   }
 }
 
-@keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+/* Custom Fade Animation */
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Toast animations */
+.toast-enter {
+  animation: toastSlideIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes toastSlideIn {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Fullscreen Loader */
+.loader-main {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(59, 130, 246, 0.2);
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }

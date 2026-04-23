@@ -1,146 +1,76 @@
-# SmartDash - React + Supabase SaaS Dashboard
+# 🚀 Smart Dashboard System (Firebase + Vanilla JS)
 
-A modern, role-based SaaS dashboard built with React 18, Vite, TypeScript, Tailwind CSS, and Supabase. Features the premium Bento dark design theme.
-
-## � Tech Stack
-
-- **React 18** - UI library
-- **Vite** - Build tool
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **Supabase** - Authentication & Database
-- **React Router v6** - Routing
-- **Lucide React** - Icons
+A professional, role-based dashboard system built using HTML, CSS, and Vanilla JavaScript.
 
 ## 📁 Project Structure
 
-```
-bento-sb/
-├── src/
-│   ├── components/
-│   │   ├── dashboard/
-│   │   │   └── Sidebar.tsx
-│   │   ├── layout/
-│   │   │   ├── Navbar.tsx
-│   │   │   └── Footer.tsx
-│   │   ├── ui/
-│   │   │   ├── Button.tsx
-│   │   │   ├── Input.tsx
-│   │   │   └── Spinner.tsx
-│   │   └── ProtectedRoute.tsx
-│   ├── hooks/
-│   │   ├── useAdmin.ts
-│   │   └── useUser.ts
-│   ├── lib/
-│   │   ├── supabase.ts
-│   │   └── utils.ts
-│   ├── pages/
-│   │   ├── AdminDashboard.tsx
-│   │   ├── LandingPage.tsx
-│   │   ├── LoginPage.tsx
-│   │   ├── ResetPasswordPage.tsx
-│   │   ├── SettingsPage.tsx
-│   │   ├── SignupPage.tsx
-│   │   └── UserDashboard.tsx
-│   ├── types/
-│   │   └── database.ts
-│   ├── App.tsx
-│   ├── index.css
-│   └── main.tsx
-├── supabase/
-│   └── migrations/
-│       └── 001_initial.sql
-├── .env.example
-├── index.html
-├── package.json
-├── postcss.config.js
-├── tailwind.config.js
-├── tsconfig.json
-└── vite.config.js
-```
+- `index.html`: Modern Landing Page.
+- `login.html` & `register.html`: Secure Authentication Pages.
+- `admin-dashboard.html`: For system administrators.
+- `user-dashboard.html`: For regular users.
+- `css/style.css`: Modern, responsive design system.
+- `js/firebase-config.js`: Firebase configuration file.
+- `js/auth.js`: Logic for registration, login, and auth monitoring.
+- `js/dashboard.js`: Main logic for populating and managing dashboards.
 
-## 🛠️ Setup Instructions
+---
 
-### 1. Install Dependencies
+## 🛠️ Step 1: Connect your Firebase
 
-```bash
-npm install
-```
+To connect your project to Firebase, follow these steps:
 
-### 2. Set Up Supabase
+1.  Go to the [Firebase Console](https://console.firebase.google.com/).
+2.  Click **"Add Project"** and follow the instructions.
+3.  Navigate to **Project Settings** (gear icon) and click on the **Web app** icon (`</>`).
+4.  Copy the `firebaseConfig` object and paste it into `/js/firebase-config.js` to replace the placeholders.
+5.  **Enable Authentication**: 
+    - Go to **Build > Authentication** and enable **Email/Password** as a sign-in method.
+6.  **Enable Firestore**:
+    - Go to **Build > Firestore Database** and click **Create Database**.
+    - Choose a location and start in **Production Mode**.
+    - Copy the contents of `firestore.rules` (from this project) into the **Rules** tab of your Firestore console.
 
-1. Go to [Supabase Console](https://supabase.com/dashboard)
-2. Create a new project
-3. Navigate to **Project Settings > API**
-4. Copy your `SUPABASE_URL` and `SUPABASE_ANON_KEY`
+---
 
-### 3. Configure Environment Variables
+## 👑 Step 2: Create the First Admin
 
-Create a `.env` file in the root directory:
+Since default registration sets every user's role to `"user"`, you must manually promote your first account:
 
-```env
-VITE_SUPABASE_URL=your_supabase_project_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
+1.  **Register** a new account via the `register.html` page.
+2.  Go to your **Firebase Console > Firestore Database**.
+3.  Find your user ID document in the `users` collection.
+4.  Edit the `role` field from `"user"` to `"admin"`.
+5.  Now, when you log in again, you'll be redirected to the **Admin Dashboard**.
 
-### 4. Run Database Migration
+---
 
-1. In Supabase Console, go to **SQL Editor**
-2. Copy the contents of `supabase/migrations/001_initial.sql`
-3. Run the SQL script to create the `profiles` table and set up RLS policies
+## 🌐 Step 3: Deploy to Firebase Hosting
 
-### 5. Start Development Server
+To deploy your live project to the web:
 
-```bash
-npm run dev
-```
+1.  **Install Firebase CLI**: 
+    ```bash
+    npm install -g firebase-tools
+    ```
+2.  **Login and Initialize**:
+    ```bash
+    firebase login
+    firebase init
+    ```
+    - Choose **Hosting** and **Firestore** from the list.
+    - Set your public directory to `./` (current directory).
+    - Choose **no** for single-page app (since we use separate HTML files).
+3.  **Deploy**:
+    ```bash
+    firebase deploy
+    ```
 
-## 👑 Creating an Admin User
+---
 
-By default, all new users have the `user` role. To create an admin:
+## 🔥 Features Included
 
-1. Sign up a new account
-2. In Supabase Console, go to **Table Editor > profiles**
-3. Find your user and change the `role` field from `user` to `admin`
-4. Log out and log back in to access the admin dashboard
-
-## 🌐 Deployment
-
-### Vercel
-
-```bash
-npm install -g vercel
-vercel
-```
-
-### Netlify
-
-```bash
-npm run build
-# Deploy the dist folder
-```
-
-## 🎨 Bento Dark Theme
-
-The project uses a custom dark theme with:
-
-- **Background**: `#0a0a0a`
-- **Surface**: `#111111`
-- **Surface 2**: `#1a1a1a`
-- **Accent**: `#c8f135` (lime green)
-- **Fonts**: DM Serif Display, DM Mono, Geist
-
-## � Features
-
-- **Secure Authentication** - Email/password and OAuth (Google)
-- **Role-Based Access Control** - User and Admin roles
-- **Protected Routes** - Auth and admin role checking
-- **User Management** - Admin can view and manage all users
-- **Profile Settings** - Users can update their profile
-- **Password Reset** - Email-based password recovery
-- **Responsive Design** - Mobile-first with Tailwind CSS
-- **Bento Grid Layout** - Modern card-based UI
-
-## 📝 License
-
-MIT
+- **Dark Mode**: Toggle via the moon/sun icon on the landing page.
+- **Role-based Redirects**: Admins see stats and a user management table; users see their profile.
+- **Route Protection**: Browsing a dashboard without logging in correctly will redirect to login.
+- **Responsive Sidebar**: Automatically transforms into a mobile-friendly menu on smaller screens.
+- **Clean Animations**: Lucide icons and CSS transitions for a premium feel.
