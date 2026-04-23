@@ -8,39 +8,37 @@ export default {
   theme: {
     extend: {
       colors: {
+        background: 'var(--bg)',
+        surface: 'var(--surface)',
+        surface2: 'var(--surface2)',
+        'surface-muted': 'var(--surface2)',
         brand: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed', // Primary Violet
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
+          DEFAULT: 'var(--accent)',
+          hover: 'var(--accent-hover)',
+          muted: 'var(--accent-muted)',
         },
-        emerald: {
-          50: '#ecfdf5',
-          500: '#10b981',
-          600: '#059669',
+        text: {
+          main: 'var(--text)',
+          secondary: 'var(--muted)',
+          muted: 'rgba(240, 237, 232, 0.3)',
         },
-        amber: {
-          50: '#fffbeb',
-          500: '#f59e0b',
-          600: '#d97706',
+        border: {
+          base: 'var(--border)',
+          strong: 'var(--border2)',
         },
-        slate: {
-          950: '#0f172a',
-        }
+        success: 'var(--accent-success)',
+        warning: 'var(--accent-warning)',
+        danger: 'var(--accent-danger)',
+        accent: 'var(--accent)',
+      },
+      borderRadius: {
+        card: 'var(--radius-2xl)',
+        btn: 'var(--radius-full)',
+        input: 'var(--radius-lg)',
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
-      fontWeight: {
-        bold: '700',
-        medium: '500',
-      }
     },
   },
   plugins: [],

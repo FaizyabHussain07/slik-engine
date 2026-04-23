@@ -1,5 +1,5 @@
 {
-  "name": "Bento-Web",
+  "name": "frost-web",
   "version": "1.0.0",
   "description": "A professional, role-based dashboard system built using HTML, CSS, and Vanilla JavaScript.",
   "main": "vite.config.js",

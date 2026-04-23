@@ -13,11 +13,11 @@ const PrivacyPolicy = () => {
   ];
 
   return (
-    <div className="bg-background transition-colors duration-300">
+    <div className="transition-colors duration-300">
       <Helmet>
-        <title>Privacy Policy | BentoWeb</title>
+        <title>Privacy Policy | Frost</title>
         <meta name="description" content="Read our privacy policy to understand how we collect, use, and protect your data." />
-        <link rel="canonical" href="https://bentoweb.example.com/privacy-policy" />
+        <link rel="canonical" href="https://frost.example.com/privacy-policy" />
       </Helmet>
 
       <Navbar />
@@ -27,10 +27,10 @@ const PrivacyPolicy = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Sidebar TOC */}
             <div className="lg:col-span-3 hidden lg:block h-fit sticky top-32">
-              <h4 className="text-xs font-black uppercase tracking-widest text-text-muted mb-6">Table of Contents</h4>
+              <h4 className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)] mb-6">Table of Contents</h4>
               <nav className="space-y-4">
                 {sections.map(s => (
-                  <a key={s.id} href={`#${s.id}`} className="block text-sm font-bold text-text-secondary hover:text-brand transition-colors">
+                  <a key={s.id} href={`#${s.id}`} className="block text-sm font-bold text-[var(--text-secondary)] hover:text-[var(--color-accent)] dark:hover:text-white transition-colors">
                     {s.title}
                   </a>
                 ))}
@@ -40,32 +40,32 @@ const PrivacyPolicy = () => {
             {/* Content */}
             <div className="lg:col-span-9 max-w-3xl">
               <div className="mb-12">
-                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-brand mb-4">Legal</h2>
-                <h1 className="text-5xl font-black text-text-main tracking-tighter mb-4">Privacy Policy</h1>
-                <p className="text-text-muted text-sm font-bold uppercase tracking-widest">Last Updated: April 23, 2026</p>
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-[var(--color-accent)] mb-4">Legal</h2>
+                <h1 className="text-5xl font-black text-[var(--text-main)] tracking-tighter mb-4">Privacy Policy</h1>
+                <p className="text-[var(--text-muted)] text-sm font-bold uppercase tracking-widest">Last Updated: April 23, 2026</p>
               </div>
 
               <div className="prose prose-slate dark:prose-invert max-w-none space-y-12">
-                <p className="text-lg text-text-secondary leading-relaxed font-medium">
-                  At BentoWeb, accessible from bentoweb.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by BentoWeb and how we use it.
+                <p className="text-lg text-[var(--text-secondary)] leading-relaxed font-medium">
+                  At Frost, accessible from frost.example.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Frost and how we use it.
                 </p>
 
                 {sections.map(s => (
                   <div key={s.id} id={s.id} className="scroll-mt-32">
-                    <h3 className="text-2xl font-black text-text-main mb-4 flex items-center gap-2">
-                      <span className="w-1 h-6 bg-brand rounded-full"></span>
+                    <h3 className="text-2xl font-black text-[var(--text-main)] mb-4 flex items-center gap-2">
+                      <span className="w-1 h-6 bg-[var(--color-accent)] rounded-full"></span>
                       {s.title}
                     </h3>
-                    <p className="text-text-secondary leading-relaxed font-medium">
+                    <p className="text-[var(--text-secondary)] leading-relaxed font-medium">
                       {s.content}
                     </p>
                   </div>
                 ))}
 
-                <div className="p-8 rounded-[2rem] bg-surface2 border border-border-base mt-16">
-                  <h4 className="text-lg font-black text-text-main mb-2">Contact Our Data Protection Officer</h4>
-                  <p className="text-text-secondary text-sm mb-4">If you have any questions about this Privacy Policy, please contact us:</p>
-                  <a href="mailto:privacy@bentoweb.com" className="text-brand font-bold hover:underline">privacy@bentoweb.com</a>
+                <div className="p-8 rounded-[2rem] glass-card mt-16">
+                  <h4 className="text-lg font-black text-[var(--text-main)] mb-2">Contact Our Data Protection Officer</h4>
+                  <p className="text-[var(--text-secondary)] text-sm mb-4">If you have any questions about this Privacy Policy, please contact us:</p>
+                  <a href="mailto:privacy@frost.example.com" className="text-[var(--color-accent)] font-bold hover:underline">privacy@frost.example.com</a>
                 </div>
               </div>
             </div>
