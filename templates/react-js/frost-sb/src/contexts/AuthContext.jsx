@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useRef } from 'react';
-import { supabase } from '../config/supabase';
+import { supabase, isSupabaseConfigured } from '../config/supabase';
 
 const AuthContext = createContext();
 
@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
   const isInitialized = useRef(false);
 
   const fetchUserData = async (userId, retries = 3) => {
+    if (!supabase) return null;
     try {
       const { data, error } = await supabase
         .from('users')
@@ -34,7 +35,14 @@ export function AuthProvider({ children }) {
     if (isInitialized.current) return;
     isInitialized.current = true;
 
+    // Skip Supabase initialization if not configured
+    if (!isSupabaseConfigured()) {
+      setLoading(false);
+      return;
+    }
+
     const syncAuth = async () => {
+      if (!supabase) return;
       // Get current session instantly
       const { data: { session } } = await supabase.auth.getSession();
       const currentUser = session?.user ?? null;
@@ -50,20 +58,22 @@ export function AuthProvider({ children }) {
     syncAuth();
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
+    if (supabase) {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+        const currentUser = session?.user ?? null;
+        setUser(currentUser);
 
-      if (currentUser) {
-        const data = await fetchUserData(currentUser.id);
-        setUserData(data);
-      } else {
-        setUserData(null);
-      }
-      setLoading(false);
-    });
+        if (currentUser) {
+          const data = await fetchUserData(currentUser.id);
+          setUserData(data);
+        } else {
+          setUserData(null);
+        }
+        setLoading(false);
+      });
 
-    return () => subscription.unsubscribe();
+      return () => subscription.unsubscribe();
+    }
   }, []);
 
   const val = { user, userData, loading };

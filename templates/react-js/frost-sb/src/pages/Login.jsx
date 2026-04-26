@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../config/supabase';
+import { supabase, isSupabaseConfigured } from '../config/supabase';
 import { Mail, Lock, ArrowLeft } from 'lucide-react';
 import { showToast } from '../components/ToastContainer';
 
@@ -12,6 +12,18 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
+    // Check if Supabase is configured
+    if (!isSupabaseConfigured()) {
+      showToast('Supabase is not configured. Please add your Supabase URL and Anon Key in the .env file to enable authentication.', 'error');
+      return;
+    }
+    
+    if (!supabase) {
+      showToast('Authentication service is unavailable. Please check your configuration.', 'error');
+      return;
+    }
+    
     setLoading(true);
     try {
       const { error: authError } = await supabase.auth.signInWithPassword({

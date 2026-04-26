@@ -3,6 +3,7 @@ declare module "degit" {
     cache?: boolean;
     force?: boolean;
     verbose?: boolean;
+    mode?: "default" | "git";
   }
 
   interface DegitEmitter {
