@@ -41,12 +41,14 @@ export async function cloneTemplate(
   try {
     await cloneWithDegit(repoPath, projectName, { mode: "default" })
   } catch (error) {
+    console.error(`Default mode failed: ${error instanceof Error ? error.message : String(error)}`)
     // Fallback to git mode if default fails
     try {
       await cloneWithDegit(repoPath, projectName, { mode: "git" })
     } catch (fallbackError) {
+      console.error(`Git mode failed: ${fallbackError instanceof Error ? fallbackError.message : String(fallbackError)}`)
       throw new CloneTemplateError(
-        `Failed to clone template. Please check your internet connection and try again.`,
+        `Failed to clone template from ${repoPath}. Please check your internet connection and try again.`,
         "CLONE_FAILED"
       )
     }
@@ -61,7 +63,7 @@ async function cloneWithDegit(
   const emitter = degit(repoPath, {
     cache: false,
     force: true,
-    verbose: false,
+    verbose: true,
     mode: options.mode,
   })
 

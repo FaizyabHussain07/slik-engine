@@ -88,5 +88,6 @@ export function getDegitPath(stack: string, vibe: string, branch: string = DEFAU
   if (!template) {
     throw new Error(`Invalid template combination: ${stack}/${vibe}`)
   }
-  return `${template.path}#${branch}`
+  // Remove branch specifier - degit may not support subdirectory + branch combination
+  return template.path
 }

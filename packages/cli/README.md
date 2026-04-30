@@ -47,7 +47,7 @@ npx create-slik@latest
 
 |              | Bento | Frost | Mono |
 |--------------|-------|-------|------|
-| Next.js 15   |  ✅   |  🔜   |  🔜  |
+| Next.js 15   |  🔜   |  🔜   |  🔜  |
 | React (Vite) |  ✅   |  ✅   |  🔜  |
 | HTML         |  🔜   |  🔜   |  🔜  |
 

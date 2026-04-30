@@ -34,9 +34,9 @@ async function main() {
   const stack = await select({
     message: "Stack?",
     options: [
-      { value: STACKS.NEXT_JS, label: "Next.js 15", hint: "SSR · App Router · Recommended" },
-      { value: STACKS.REACT_JS, label: "React (Vite)", hint: "SPA · Client-side only" },
-      { value: STACKS.HTML, label: "Vanilla HTML", hint: "Zero framework · Ultra-light" },
+      // { value: STACKS.NEXT_JS, label: "Next.js 15", hint: "SSR · App Router · Recommended" },
+      { value: STACKS.REACT_JS, label: "React (Vite)", hint: "SPA · Client-side only" }
+      // { value: STACKS.HTML, label: "Vanilla HTML", hint: "Zero framework · Ultra-light" },
     ],
   })
   if (isCancel(stack)) {
@@ -49,8 +49,8 @@ async function main() {
     message: "Vibe?",
     options: [
       { value: VIBES.BENTO_SB, label: "Bento", hint: "Grid-based · Dark · Editorial" },
-      { value: VIBES.FROST_SB, label: "Frost", hint: "Glassmorphism · Light + blur" },
-      { value: VIBES.MONO_SB, label: "Mono", hint: "Minimal · Monochrome" },
+      { value: VIBES.FROST_SB, label: "Frost", hint: "Glassmorphism · Light + blur" }
+      // { value: VIBES.MONO_SB, label: "Mono", hint: "Minimal · Monochrome" },
     ],
   })
   if (isCancel(vibe)) {
