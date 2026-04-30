@@ -37,12 +37,12 @@ export async function cloneTemplate(
     rmSync(targetDir, { recursive: true, force: true })
   }
 
-  // Try default degit mode first
+  // Try tar mode first (uses GitHub API, no auth required)
   try {
-    await cloneWithDegit(repoPath, projectName, { mode: "default" })
+    await cloneWithDegit(repoPath, projectName, { mode: "tar" })
   } catch (error) {
-    console.error(`Default mode failed: ${error instanceof Error ? error.message : String(error)}`)
-    // Fallback to git mode if default fails
+    console.error(`Tar mode failed: ${error instanceof Error ? error.message : String(error)}`)
+    // Fallback to git mode if tar fails
     try {
       await cloneWithDegit(repoPath, projectName, { mode: "git" })
     } catch (fallbackError) {
@@ -58,7 +58,7 @@ export async function cloneTemplate(
 async function cloneWithDegit(
   repoPath: string,
   projectName: string,
-  options: { mode: "default" | "git" }
+  options: { mode: "tar" | "git" }
 ): Promise<void> {
   const emitter = degit(repoPath, {
     cache: false,
