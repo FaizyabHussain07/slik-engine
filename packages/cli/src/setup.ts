@@ -8,7 +8,11 @@ export async function setupProject(projectName: string): Promise<void> {
   const cwd = join(process.cwd(), projectName)
 
   // Install dependencies
-  await execa("npm", ["install"], { cwd, stdio: "pipe" })
+  try {
+    await execa("npm", ["install"], { cwd, stdio: "inherit", shell: true })
+  } catch (error) {
+    throw new Error(`npm install failed: ${error instanceof Error ? error.message : String(error)}`)
+  }
 
   // Git init
   try {
