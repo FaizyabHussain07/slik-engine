@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // slik — packages/cli/src/index.ts
 
-import { intro, text, select, spinner, outro, isCancel, cancel } from "@clack/prompts"
+import { intro, text, select, spinner, outro, isCancel, cancel, note } from "@clack/prompts"
 import { cloneTemplate, CloneTemplateError } from "./clone.js"
 import { setupProject } from "./setup.js"
 import {
@@ -11,14 +11,15 @@ import {
   VIBES,
   DEFAULT_BRANCH,
 } from "./templates.js"
+import pc from "picocolors"
 
 async function main() {
   console.log("")
-  intro("✦ slik — design at the speed of thought")
+  intro(pc.cyan(pc.bold("✦ slik")) + pc.dim(" — design at the speed of thought"))
 
   // Project name
   const projectName = await text({
-    message: "Project name?",
+    message: pc.dim("Project name?"),
     placeholder: "my-app",
     validate: (v) => {
       if (!v || v.trim() === "") return "Project name is required"
@@ -32,11 +33,9 @@ async function main() {
 
   // Stack
   const stack = await select({
-    message: "Stack?",
+    message: pc.dim("Select stack?"),
     options: [
-      // { value: STACKS.NEXT_JS, label: "Next.js 15", hint: "SSR · App Router · Recommended" },
-      { value: STACKS.REACT_JS, label: "React (Vite)", hint: "SPA · Client-side only" }
-      // { value: STACKS.HTML, label: "Vanilla HTML", hint: "Zero framework · Ultra-light" },
+      { value: STACKS.REACT_JS, label: pc.green("⚡ React (Vite)"), hint: "SPA · Client-side · Fast" }
     ],
   })
   if (isCancel(stack)) {
@@ -46,11 +45,10 @@ async function main() {
 
   // Vibe
   const vibe = await select({
-    message: "Vibe?",
+    message: pc.dim("Select design vibe?"),
     options: [
-      { value: VIBES.BENTO_SB, label: "Bento", hint: "Grid-based · Dark · Editorial" },
-      { value: VIBES.FROST_SB, label: "Frost", hint: "Glassmorphism · Light + blur" }
-      // { value: VIBES.MONO_SB, label: "Mono", hint: "Minimal · Monochrome" },
+      { value: VIBES.BENTO_SB, label: pc.yellow("🍱 Bento"), hint: "Grid-based · Dark · Editorial" },
+      { value: VIBES.FROST_SB, label: pc.blue("❄️  Frost"), hint: "Glassmorphism · Light + blur" }
     ],
   })
   if (isCancel(vibe)) {
@@ -70,38 +68,44 @@ async function main() {
   const s = spinner()
 
   // Clone
-  s.start("Cloning template...")
+  s.start(pc.dim("Cloning template from GitHub..."))
   try {
     await cloneTemplate(repoPath, projectName as string)
-    s.stop("Template ready ✓")
+    s.stop(pc.green("✓ Template cloned successfully"))
   } catch (err) {
-    s.stop("Clone failed ✗")
+    s.stop(pc.red("✗ Clone failed"))
     if (err instanceof CloneTemplateError) {
-      console.error(`\n${err.message}`)
+      console.error(pc.red(`\n  ${err.message}`))
     } else {
-      console.error("\nAn unexpected error occurred while cloning the template.")
+      console.error(pc.red("\n  An unexpected error occurred while cloning the template."))
     }
     process.exit(1)
   }
 
   // Setup
-  s.start("Installing dependencies...")
+  s.start(pc.dim("Installing dependencies..."))
   try {
     await setupProject(projectName as string)
-    s.stop("Done ✓")
+    s.stop(pc.green("✓ Dependencies installed"))
   } catch (err) {
-    s.stop("Setup failed ✗")
-    console.error("\nAn unexpected error occurred during setup.")
+    s.stop(pc.red("✗ Setup failed"))
+    console.error(pc.red("\n  An unexpected error occurred during setup."))
+    console.error(pc.dim(`\n  Try running: cd ${projectName} && npm install`))
     process.exit(1)
   }
 
-  outro(
-    `✦ Your Slik project is ready!\n\n` +
-    `  Next steps:\n` +
-    `  cd ${projectName}\n` +
-    `  Fill in .env.local with your Supabase credentials\n` +
-    `  npm run dev\n\n` +
-    `  Docs → https://slik-dev.vercel.app/docs`
+  const stackLabel = stack === STACKS.REACT_JS ? "React + Vite" : "React + Vite"
+  const vibeLabel = vibe === VIBES.BENTO_SB ? "Bento" : "Frost"
+  
+  note(
+    pc.green(pc.bold(`✦ Project "${projectName}" created!\n`)) +
+    pc.dim(`  Stack: `) + pc.white(stackLabel) + pc.dim(`  |  Vibe: `) + pc.white(vibeLabel) + "\n\n" +
+    pc.cyan(pc.bold("Next steps:\n")) +
+    pc.white(`  cd ${projectName}\n`) +
+    pc.white(`  ${vibe === VIBES.BENTO_SB ? "cp .env.example .env.local" : "npm run dev"}\n`) +
+    (vibe === VIBES.BENTO_SB ? pc.dim("  (Add your Supabase credentials to .env.local)\n") : "") +
+    "\n" +
+    pc.dim("Documentation: ") + pc.cyan("https://slik-dev.vercel.app/docs")
   )
 }
 
